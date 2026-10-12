@@ -1,0 +1,54 @@
+{
+  "name": "@zencss/vite",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./client": {
+      "types": "./dist/client.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "vite": "^6.0.0 || ^7.0.0"
+  },
+  "dependencies": {
+    "@zencss/core": "0.1.0"
+  },
+  "description": "On-demand ZenCSS compilation and hot updates for Vite.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "check-package.mjs"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "keywords": [
+    "css",
+    "utility-first",
+    "design-system",
+    "themes",
+    "zencss"
+  ],
+  "scripts": {
+    "prepack": "node ./check-package.mjs"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts"
+}

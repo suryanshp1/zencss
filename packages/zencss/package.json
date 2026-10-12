@@ -1,0 +1,75 @@
+{
+  "name": "@suryanshp1/zencss",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A CSS-first utility framework with semantic tokens, four themes, accessible recipes, a Vite plugin and CLI.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "check-package.mjs"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "keywords": [
+    "css",
+    "utility-first",
+    "design-system",
+    "themes",
+    "zencss"
+  ],
+  "scripts": {
+    "prepack": "node ./check-package.mjs"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles": "./dist/base.css",
+    "./styles.css": "./dist/base.css",
+    "./client": {
+      "types": "./dist/client.d.ts"
+    },
+    "./vite": {
+      "import": {
+        "types": "./dist/vite.d.ts",
+        "default": "./dist/vite.js"
+      },
+      "require": {
+        "types": "./dist/vite.d.cts",
+        "default": "./dist/vite.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "style": "./dist/base.css",
+  "peerDependencies": {
+    "vite": "^6.0.0 || ^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vite": {
+      "optional": true
+    }
+  },
+  "bin": {
+    "zen": "./dist/cli.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

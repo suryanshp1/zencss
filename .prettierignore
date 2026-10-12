@@ -1,0 +1,10 @@
+node_modules/
+output/
+artifacts/
+dist/
+packages/*/dist/
+packages/*/LICENSE
+packages/*/check-package.mjs
+packages/core/base.css
+examples/vanilla/zen.css
+examples/*/dist/

@@ -1,0 +1,35 @@
+{
+  "name": "zencss-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "examples/vite-react"
+  ],
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "npm run build:packages && tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "benchmark": "node --experimental-strip-types benchmarks/run.ts",
+    "zen": "node --experimental-strip-types packages/cli/index.ts",
+    "dev:react": "npm run dev --workspace=zencss-react-starter",
+    "build:react": "npm run build --workspace=zencss-react-starter",
+    "build:css": "node --experimental-strip-types tooling/standalone.ts",
+    "format": "prettier --write src packages tests benchmarks tooling examples vite.config.ts tsconfig.json package.json",
+    "format:check": "prettier --check src packages tests benchmarks tooling examples vite.config.ts tsconfig.json package.json",
+    "build:packages": "npm run build:css && node --experimental-strip-types tooling/build-packages.ts",
+    "pack:packages": "npm run build:packages && node --experimental-strip-types tooling/pack-packages.ts",
+    "test:package": "npm run pack:packages && node --experimental-strip-types --test tests/distribution.test.mts"
+  },
+  "devDependencies": {
+    "@fontsource/dm-mono": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@types/node": "^24.0.0",
+    "prettier": "^3.9.10",
+    "typescript": "^5.9.0",
+    "vite": "^7.0.0",
+    "esbuild": "^0.28.2"
+  }
+}

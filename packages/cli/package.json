@@ -1,0 +1,32 @@
+{
+  "name": "@zencss/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Build, watch, lint and explain ZenCSS from the command line.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "check-package.mjs"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "keywords": [
+    "css",
+    "utility-first",
+    "design-system",
+    "themes",
+    "zencss"
+  ],
+  "scripts": {
+    "prepack": "node ./check-package.mjs"
+  },
+  "bin": {
+    "zen": "./dist/cli.js"
+  }
+}

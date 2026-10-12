@@ -1,0 +1,196 @@
+@layer zen-reset, zen-tokens, zen-base, zen-recipes, zen-utilities, zen-overrides;
+@layer zen-reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+  }
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+}
+@layer zen-base {
+  body {
+    font-family: var(--zen-font-sans);
+    line-height: 1.5;
+  }
+  :focus-visible {
+    outline: 2px solid var(--zen-accent);
+    outline-offset: 3px;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+@layer zen-tokens {
+  :root {
+    --zen-space-unit: 0.25rem;
+    --zen-radius-control: 0.375rem;
+    --zen-radius-card: 0.75rem;
+    --zen-space-section: clamp(3rem, 8vw, 6rem);
+    --zen-font-sans:
+      Inter, ui-sans-serif, system-ui, -apple-system, "Noto Sans JP", sans-serif;
+    --zen-font-display: Georgia, "Noto Serif JP", serif;
+    --zen-shadow-sm: 0 2px 8px #24282408;
+    --zen-shadow-md: 0 8px 28px #24282412;
+    --zen-surface: #f7f5ef;
+    --zen-panel: #fffefa;
+    --zen-text: #242824;
+    --zen-muted: #686b60;
+    --zen-border: #dddcd2;
+    --zen-accent: #4e684b;
+    --zen-on-accent: #ffffff;
+    --zen-soft: #e9edde;
+    --zen-danger: #a33c32;
+  }
+  [data-zen-theme="washi"] {
+    --zen-surface: #f7f5ef;
+    --zen-panel: #fffefa;
+    --zen-text: #242824;
+    --zen-muted: #686b60;
+    --zen-border: #dddcd2;
+    --zen-accent: #4e684b;
+    --zen-on-accent: #ffffff;
+    --zen-soft: #e9edde;
+    --zen-danger: #a33c32;
+  }
+  [data-zen-theme="sumi"] {
+    --zen-surface: #20251f;
+    --zen-panel: #2a3028;
+    --zen-text: #f2f3e9;
+    --zen-muted: #b0b8a8;
+    --zen-border: #46503f;
+    --zen-accent: #b4cba2;
+    --zen-on-accent: #20251f;
+    --zen-soft: #35432e;
+    --zen-danger: #ffaaa0;
+  }
+  [data-zen-theme="matcha"] {
+    --zen-surface: #eef2e7;
+    --zen-panel: #fafcf6;
+    --zen-text: #29382a;
+    --zen-muted: #596b51;
+    --zen-border: #cfdac5;
+    --zen-accent: #48623d;
+    --zen-on-accent: #ffffff;
+    --zen-soft: #dfe8d3;
+    --zen-danger: #a33c32;
+  }
+  [data-zen-theme="mono"] {
+    --zen-surface: #f3f3f3;
+    --zen-panel: #ffffff;
+    --zen-text: #242424;
+    --zen-muted: #666666;
+    --zen-border: #d9d9d9;
+    --zen-accent: #333333;
+    --zen-on-accent: #ffffff;
+    --zen-soft: #e8e8e8;
+    --zen-danger: #a33c32;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-zen-theme]) {
+      --zen-surface: #20251f;
+      --zen-panel: #2a3028;
+      --zen-text: #f2f3e9;
+      --zen-muted: #b0b8a8;
+      --zen-border: #46503f;
+      --zen-accent: #b4cba2;
+      --zen-on-accent: #20251f;
+      --zen-soft: #35432e;
+      --zen-danger: #ffaaa0;
+    }
+  }
+}
+@layer zen-recipes {
+  .recipe-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    background: var(--zen-soft);
+    color: var(--zen-accent);
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  .recipe-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.125rem;
+    background: var(--zen-accent);
+    color: var(--zen-on-accent);
+    border: 1px solid transparent;
+    border-radius: var(--zen-radius-control);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background-color 160ms ease,
+      opacity 160ms ease;
+  }
+  .recipe-card {
+    padding: calc(var(--zen-space-unit) * 8);
+    background: var(--zen-panel);
+    color: var(--zen-text);
+    border: 1px solid var(--zen-border);
+    border-radius: var(--zen-radius-card);
+  }
+}
+@layer zen-utilities {
+  .bg-surface {
+    background-color: var(--zen-surface);
+  }
+  .font-display {
+    font-family: var(--zen-font-display);
+  }
+  .layout-center {
+    width: min(100% - 2rem, 72rem);
+    margin-inline: auto;
+  }
+  .measure-prose {
+    max-width: 65ch;
+  }
+  .mt-6 {
+    margin-top: calc(var(--zen-space-unit) * 6);
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .space-section {
+    padding-block: var(--zen-space-section);
+  }
+  .text-4xl {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    line-height: 1.4;
+  }
+  .text-muted {
+    color: var(--zen-muted);
+  }
+  .text-primary {
+    color: var(--zen-text);
+  }
+  .tracking-tight {
+    letter-spacing: -0.035em;
+  }
+  .leading-relaxed {
+    line-height: 1.7;
+  }
+  .hover\:opacity-80:hover {
+    opacity: 0.8;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

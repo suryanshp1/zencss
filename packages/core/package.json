@@ -1,0 +1,48 @@
+{
+  "name": "@zencss/core",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles": "./dist/base.css",
+    "./styles.css": "./dist/base.css",
+    "./package.json": "./package.json"
+  },
+  "description": "ZenCSS utility compiler, semantic tokens, themes and CSS recipes.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "check-package.mjs"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "keywords": [
+    "css",
+    "utility-first",
+    "design-system",
+    "themes",
+    "zencss"
+  ],
+  "scripts": {
+    "prepack": "node ./check-package.mjs"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "style": "./dist/base.css"
+}
