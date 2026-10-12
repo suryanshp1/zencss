@@ -15,6 +15,23 @@ import { execFileSync } from "node:child_process";
 import { build } from "vite";
 const root = resolve(import.meta.dirname, "..");
 const cache = resolve(root, "output/npm-cache");
+const manifests = Object.fromEntries(
+  await Promise.all(
+    ["zencss", "core", "vite", "cli"].map(async (directory) => [
+      directory,
+      JSON.parse(
+        await readFile(
+          resolve(root, "packages", directory, "package.json"),
+          "utf8",
+        ),
+      ),
+    ]),
+  ),
+);
+function archive(directory: string) {
+  const pkg = manifests[directory];
+  return `${pkg.name.replace("@", "").replace("/", "-")}-${pkg.version}.tgz`;
+}
 async function install(names: string[], skipPeerResolution = false) {
   const dir = await realpath(await mkdtemp(join(tmpdir(), "zen-consumer-")));
   await writeFile(
@@ -50,7 +67,7 @@ function node(dir: string, source: string, cjs = false) {
   );
 }
 test("single package installs outside the repository and works without a TypeScript runtime", async () => {
-  const dir = await install(["suryanshp1-zencss-0.1.0.tgz"]);
+  const dir = await install([archive("zencss")]);
   try {
     const esm = node(
       dir,
@@ -90,6 +107,31 @@ test("single package installs outside the repository and works without a TypeScr
         "utf8",
       ),
     );
+    assert.equal(
+      metadata.repository.url,
+      "git+https://github.com/suryanshp1/zencss.git",
+    );
+    assert.equal(
+      metadata.bugs.url,
+      "https://github.com/suryanshp1/zencss/issues",
+    );
+    for (const file of [
+      "README.md",
+      "CHANGELOG.md",
+      "docs/CONTRIBUTING.md",
+      "docs/SECURITY.md",
+      "docs/RELEASING.md",
+      "LICENSE",
+    ])
+      assert.ok(
+        (
+          await readFile(
+            join(dir, "node_modules/@suryanshp1/zencss", file),
+            "utf8",
+          )
+        ).length > 100,
+        `missing consumer documentation: ${file}`,
+      );
     assert.ok(
       !metadata.dependencies,
       "single package should not depend on unpublished workspace packages",
@@ -107,7 +149,7 @@ test("single package installs outside the repository and works without a TypeScr
   }
 });
 test("packed package drives a fresh Vite production build and exports ESM/CJS types", async () => {
-  const dir = await install(["suryanshp1-zencss-0.1.0.tgz"]);
+  const dir = await install([archive("zencss")]);
   try {
     // Supply the independently installed Vite peer and compiler tools, never ZenCSS source/workspace links.
     await symlink(
@@ -208,7 +250,7 @@ test("packed package drives a fresh Vite production build and exports ESM/CJS ty
 });
 test("scoped archives contain usable compiled entry points", async () => {
   const dir = await install(
-    ["zencss-core-0.1.0.tgz", "zencss-vite-0.1.0.tgz", "zencss-cli-0.1.0.tgz"],
+    [archive("core"), archive("vite"), archive("cli")],
     true,
   );
   try {

@@ -1,6 +1,6 @@
 {
   "name": "@suryanshp1/zencss",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "A CSS-first utility framework with semantic tokens, four themes, accessible recipes, a Vite plugin and CLI.",
   "license": "MIT",
@@ -10,6 +10,8 @@
   "files": [
     "dist",
     "README.md",
+    "CHANGELOG.md",
+    "docs",
     "LICENSE",
     "check-package.mjs"
   ],
@@ -18,9 +20,17 @@
   ],
   "keywords": [
     "css",
+    "css-framework",
     "utility-first",
+    "semantic-tokens",
     "design-system",
     "themes",
+    "vite",
+    "cli",
+    "react",
+    "vue",
+    "svelte",
+    "astro",
     "zencss"
   ],
   "scripts": {
@@ -71,5 +81,18 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "author": {
+    "name": "suryanshp1",
+    "url": "https://github.com/suryanshp1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suryanshp1/zencss.git",
+    "directory": "packages/zencss"
+  },
+  "homepage": "https://github.com/suryanshp1/zencss#readme",
+  "bugs": {
+    "url": "https://github.com/suryanshp1/zencss/issues"
   }
 }

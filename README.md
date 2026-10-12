@@ -1,6 +1,10 @@
 # ZenCSS
 
-Less, but intentional. A working local alpha based on [PRD.md](./PRD.md).
+Less, but intentional. A CSS-first utility framework for thoughtful interfaces.
+
+[Consumer documentation](./packages/zencss/README.md) · [GitHub](https://github.com/suryanshp1/zencss) · [Issues](https://github.com/suryanshp1/zencss/issues) · [Changelog](./packages/zencss/CHANGELOG.md)
+
+The recommended npm package is **@suryanshp1/zencss**. For the registry release, install it with `npm install -D @suryanshp1/zencss`; before publication, use the packed archive below. Consumer documentation includes Vite/React/Vue/Svelte/Astro examples, vanilla HTML, tokens, utilities, recipes, custom configuration, CLI/API usage, diagnostics, and compatibility limits.
 
 ## Install the framework in your own app
 
@@ -16,7 +20,7 @@ npm run pack:packages
 Then install the archive in any independent project:
 
 ```sh
-npm install -D /absolute/path/to/zencss/artifacts/suryanshp1-zencss-0.1.0.tgz
+npm install -D /absolute/path/to/zencss/artifacts/suryanshp1-zencss-0.1.1.tgz
 ```
 
 Configure Vite:
@@ -42,7 +46,7 @@ For a prebuilt stylesheet, import `@suryanshp1/zencss/styles` from your CSS or J
 
 Consumers require Node.js 20.19+, but do not need a TypeScript runtime. Compiled ESM, CommonJS, declarations, source maps, CSS, executable CLI, and licenses are included. The single package has no dependency on unpublished workspace packages. Archives are written to `artifacts/`; scoped core, Vite and CLI archives are also provided.
 
-The recommended package is @suryanshp1/zencss. npm rejected the unscoped name as too similar to zen-css. This task prepares the scoped archive; it does not publish it. Optional @zencss/* split packages remain local working names.
+The recommended package is @suryanshp1/zencss. The optional @zencss/* split packages are local working names; the all-in-one package is self-contained. See the [release guide](./packages/zencss/docs/RELEASING.md) for first publication and subsequent versions.
 
 ## Run the documentation and playground
 
@@ -151,3 +155,7 @@ Feature-based browser target: Chrome 105+, Safari 16+, Firefox 110+. Chromium wo
 ## License
 
 MIT. See LICENSE.
+
+## Contributing, support, and security
+
+See [CONTRIBUTING](./packages/zencss/docs/CONTRIBUTING.md) for development and validation, and [SECURITY](./packages/zencss/docs/SECURITY.md) for private disclosure guidance. Report ordinary bugs and feature requests through [GitHub Issues](https://github.com/suryanshp1/zencss/issues).
