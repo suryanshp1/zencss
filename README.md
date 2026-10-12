@@ -26,8 +26,8 @@ npm install -D /absolute/path/to/zencss/artifacts/suryanshp1-zencss-0.1.1.tgz
 Configure Vite:
 
 ```js
-import { defineConfig } from 'vite';
-import zen from '@suryanshp1/zencss/vite';
+import { defineConfig } from "vite";
+import zen from "@suryanshp1/zencss/vite";
 
 export default defineConfig({ plugins: [zen()] });
 ```
@@ -73,21 +73,23 @@ The React starter imports the package's compiled exports: `npm run build:package
 All package exports point to compiled distribution files. `npm run pack:packages` verifies entry points and includes only distribution files, package documentation, license, and the packaging guard. No consumer imports sibling source directories.
 
 ```ts
-import { compile, explain, mergeClasses } from '@suryanshp1/zencss';
+import { compile, explain, mergeClasses } from "@suryanshp1/zencss";
 
-const { css, diagnostics } = compile('<div class="recipe-card p-6 bg-surface"></div>');
-const result = explain('bg-surface p-6 md:hover:bg-accent');
-const className = mergeClasses('p-2 text-muted', 'p-6');
+const { css, diagnostics } = compile(
+  '<div class="recipe-card p-6 bg-surface"></div>',
+);
+const result = explain("bg-surface p-6 md:hover:bg-accent");
+const className = mergeClasses("p-2 text-muted", "p-6");
 ```
 
 ### Vite integration
 
 ```ts
-import { defineConfig } from 'vite';
-import zen from '@suryanshp1/zencss/vite';
+import { defineConfig } from "vite";
+import zen from "@suryanshp1/zencss/vite";
 
 export default defineConfig({
-  plugins: [zen({ configFile: './theme.css' })],
+  plugins: [zen({ configFile: "./theme.css" })],
 });
 ```
 
@@ -116,8 +118,13 @@ Migration is a read-only compatibility report, not a source rewrite.
   content-visibility: auto;
 }
 @zen-recipe note {
-  base { padding: 1rem; border-radius: 0.5rem; }
-  variant quiet { background: var(--zen-soft); }
+  base {
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  variant quiet {
+    background: var(--zen-soft);
+  }
 }
 ```
 
@@ -159,3 +166,9 @@ MIT. See LICENSE.
 ## Contributing, support, and security
 
 See [CONTRIBUTING](./packages/zencss/docs/CONTRIBUTING.md) for development and validation, and [SECURITY](./packages/zencss/docs/SECURITY.md) for private disclosure guidance. Report ordinary bugs and feature requests through [GitHub Issues](https://github.com/suryanshp1/zencss/issues).
+
+## CI and npm releases
+
+[Verify ZenCSS](./.github/workflows/ci.yml) checks Linux/macOS on Node 22.18 and 24, formatting, builds, compiler/documentation/native watch tests, and installed npm archives. It saves package archives and benchmark results as GitHub Actions artifacts, then verifies compiled ESM/CommonJS imports and CLI execution on the minimum supported Node 20.19 consumer runtime.
+
+[Publish ZenCSS to npm](./.github/workflows/npm-publish.yml) is manually triggered from the default branch. It runs verification before publishing the committed scoped package version through npm OIDC trusted publishing. Configure the npm trusted publisher and GitHub `npm` environment using the [release setup guide](./packages/zencss/docs/RELEASING.md#github-actions-ci-and-publishing). No npm token secret is required. Local checks do not dispatch a GitHub workflow or publish a package.

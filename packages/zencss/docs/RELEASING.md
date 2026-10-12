@@ -51,3 +51,26 @@ npm install -D @suryanshp1/zencss
 ```
 
 Verify the npm README and package metadata. Existing `0.x` releases use npm's selected dist-tag; use an explicit `--tag alpha` if you want an opt-in prerelease channel instead of `latest`.
+
+## GitHub Actions CI and publishing
+
+The verification workflow runs on pull requests, pushes to `main`/`master`, and manual dispatch. It checks Linux and macOS with Node 22.18 and 24, source/workflow formatting, compiler/documentation/integration tests, independent package installation, docs and starter builds. Its Node 24 Linux job saves npm archives and benchmark results as downloadable Actions artifacts. A dependent job installs the verified package archive and checks ESM/CommonJS imports and CLI execution on Node 20.19, the minimum supported consumer runtime. Benchmarks are recorded, not enforced as performance thresholds.
+
+For registry releases, `.github/workflows/npm-publish.yml` is **manual only**. It runs verification first, accepts releases only from the repository's default branch, validates the requested version against the manifest/starter/changelog, and publishes only `@suryanshp1/zencss`. Stable numeric versions use `latest`; versions containing a prerelease suffix use `alpha`. It does not increment versions, create tags, or publish the optional split packages.
+
+One-time setup after the first manual npm publication:
+
+1. In GitHub repository settings, create an environment named `npm`. Configure required reviewers if you want release approval before publication.
+2. In the npm settings for `@suryanshp1/zencss`, add a GitHub Actions trusted publisher:
+   - Organization/user: `suryanshp1`
+   - Repository: `zencss`
+   - Workflow filename: `npm-publish.yml`
+   - Environment: `npm`
+   - Allow direct publishing with `npm publish`.
+3. Commit the workflows and release version changes to the default branch.
+4. Open GitHub Actions → **Publish ZenCSS to npm** → **Run workflow**, select the default branch, and enter the exact committed package version.
+5. If reviewers are configured for the `npm` environment, approve the verified release there. Verify the registry version after the run succeeds.
+
+The workflow uses Node 24, npm 11, GitHub-hosted runners, OIDC permission scoped to the publishing job, and package provenance. It needs no `NPM_TOKEN` secret. Do not add a registry authentication token to this workflow's environment, because that could override the intended OIDC authentication path. Configure npm's trusted publisher to match the workflow/environment exactly.
+
+Official setup reference: https://docs.npmjs.com/trusted-publishers/
